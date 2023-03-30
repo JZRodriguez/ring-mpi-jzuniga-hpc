@@ -1,0 +1,47 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <mpi.h>
+
+int main(int argc, char **argv) {
+  int numproc;
+  int miproc;
+  float x;
+  float cycles;
+
+  cycles = 5;
+
+  
+
+  MPI_Init (&argc, &argv); /* Inicializar MPI */
+  MPI_Comm_rank(MPI_COMM_WORLD,&miproc); /* Determinar el rango del proceso invocado*/
+  MPI_Comm_size(MPI_COMM_WORLD,&numproc); /* Determinar el numero de procesos */
+
+  x = miproc;
+
+  MPI_Barrier (MPI_COMM_WORLD);
+
+  /*
+    0.- Initialize everyone
+    1.- Process Zero EXCLUSIVELY sends a message forwards
+    2.- EVERYONE does Cycles receives, then sends the data forwards
+    3.- Once Zero is at 0 cycles, end everyone and return
+   */
+
+  while (cycles > 0) {
+      data = i + 1;
+      MPI_Send(&data, sizeof(data), MPI_CHAR, i+1, 98, MPI_COMM_WORLD);
+
+      MPI_Recv(&data, sizeof(data), MPI_CHAR, i, 98, MPI_COMM_WORLD, &status);
+
+      response = data + (i + 1)
+      cycles-=1
+  }
+
+
+  MPI_Abort(MPI_COMM_WORLD);
+
+  MPI_Finalize ();
+
+  return 0;
+
+}
